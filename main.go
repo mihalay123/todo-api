@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	_ "todo-api/docs"
-	"todo-api/todo"
+	"todo-api/internal/todo"
 
 	httpSwagger "github.com/swaggo/http-swagger"
 )

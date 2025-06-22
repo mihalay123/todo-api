@@ -3,6 +3,7 @@ package todo
 import (
 	"encoding/json"
 	"net/http"
+	"todo-api/internal/utils"
 )
 
 var todos = []Todo{}
@@ -14,7 +15,10 @@ func TodoHandler(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(todos)
 	case http.MethodPost:
 		var t Todo
-		json.NewDecoder(r.Body).Decode(&t)
+		if err := utils.DecodeStrictJson(r, &t); err != nil {
+			http.Error(w, "Invalid request body", http.StatusBadRequest)
+			return
+		}
 		t.ID = nextID
 		nextID++
 		todos = append(todos, t)
