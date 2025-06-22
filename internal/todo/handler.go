@@ -34,6 +34,12 @@ func createTodo(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
+
+	if t.Title == "" {
+		http.Error(w, "Title is required", http.StatusBadRequest)
+		return
+	}
+
 	t.ID = nextID
 	nextID++
 	todos = append(todos, t)
