@@ -81,6 +81,11 @@ func updateTodo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if updated.Title == "" {
+		http.Error(w, "Title is required", http.StatusBadRequest)
+		return
+	}
+
 	for i, t := range todos {
 		if t.ID == id {
 			todos[i].Title = updated.Title
@@ -89,6 +94,8 @@ func updateTodo(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+
+	http.NotFound(w, r)
 }
 
 // DeleteTodo godoc

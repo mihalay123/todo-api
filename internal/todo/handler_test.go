@@ -106,3 +106,21 @@ func TestCreateTodo_EmptyTitle(t *testing.T) {
 		t.Errorf("expected 400 for empty title, got %d", w.Result().StatusCode)
 	}
 }
+
+func TestUpdateTodo_EmptyTitle(t *testing.T) {
+	body := []byte(`{"title":"","done":true}`)
+	req := httptest.NewRequest(http.MethodPost, "/todos", bytes.NewReader(body))
+	w := httptest.NewRecorder()
+	TodoHandler(w, req)
+
+	var created Todo
+	json.NewDecoder(w.Result().Body).Decode(&created)
+
+	updateReq := httptest.NewRequest(http.MethodPut, "/todos/"+strconv.Itoa(created.ID), bytes.NewReader(body))
+	updateW := httptest.NewRecorder()
+	TodoItemHandler(updateW, updateReq)
+
+	if updateW.Result().StatusCode != http.StatusBadRequest {
+		t.Errorf("expected 400 for empty title on update, got %d", updateW.Result().StatusCode)
+	}
+}
