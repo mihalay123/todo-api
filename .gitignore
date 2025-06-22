@@ -31,9 +31,9 @@ go.work.sum
 # .idea/
 # .vscode/
 
-# Air (live reload)
+# Air 
 tmp/
 .air.toml
 
-# Swagger docs (если генерируется автоматически)
+# Swagger docs 
 docs/
