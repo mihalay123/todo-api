@@ -10,14 +10,18 @@ import (
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
-// @title           ToDo API
+// @title           Todo API
 // @version         1.0
-// @description     Простое API для управления задачами
-// @host            localhost:8080
-// @BasePath        /
+// @description     A simple API to manage a todo list in memory
+
+// @contact.name   Mike
+// @contact.email  mihalay26@gmail.com
+
+// @host      localhost:8080
+// @BasePath  /
 
 func main() {
-	http.Handle("/docs/", httpSwagger.WrapHandler)
+	http.Handle("/swagger/", httpSwagger.WrapHandler)
 
 	http.HandleFunc("/todos", todo.TodoHandler)
 	http.HandleFunc("/todos/", todo.TodoItemHandler)
