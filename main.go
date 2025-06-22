@@ -18,7 +18,10 @@ import (
 
 func main() {
 	http.Handle("/docs/", httpSwagger.WrapHandler)
+
 	http.HandleFunc("/todos", todo.TodoHandler)
+	http.HandleFunc("/todos/", todo.TodoItemHandler)
+
 	log.Println("Server started at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
