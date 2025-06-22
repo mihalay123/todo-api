@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-var todos []Todo
+var todos = []Todo{}
 var nextID = 1
 
 func TodoHandler(w http.ResponseWriter, r *http.Request) {
